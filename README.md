@@ -16,9 +16,6 @@ stickers/
   flustered/  害羞、慌张
   teasing/    调皮、捉弄
   neutral/    日常
-  manifest.json     自动生成：每张图的情绪和 sha256
-  sha256_list.txt   自动生成：校验清单
-tools/build_manifest.py   生成清单并检查规范
 tools/build_qqstickers.py 生成大肥鱼 QQ 版直接能用的 QQStickers 目录
 titles.tsv                每张图的配字
 ```
@@ -37,7 +34,7 @@ titles.tsv                每张图的配字
    python3 tools/build_qqstickers.py <大肥鱼的 Resources 目录>/QQStickers
    ```
 
-   大肥鱼要求图片和 `manifest.json` 放在同一层，`file` 只能写文件名，清单还要有 `id`、`title`、`emotion`、`file`、`sha256`、`source` 这几项。脚本会把 8 个情绪文件夹里的图平铺复制过去，并按这个格式生成清单，配字取自 `titles.tsv`。**不要**直接复制 `stickers/` 和里面的 `manifest.json`，那份格式大肥鱼读不了。
+   大肥鱼要求图片和 `manifest.json` 放在同一层，`file` 只能写文件名，清单还要有 `id`、`title`、`emotion`、`file`、`sha256`、`source` 这几项。脚本会把 8 个情绪文件夹里的图平铺复制过去，并按这个格式生成清单，配字取自 `titles.tsv`。**不要**直接复制 `stickers/` 文件夹，大肥鱼读不了这种分文件夹的结构。
 3. 重启大肥鱼。面板里可以调表情包开关、每几条回复配一张图、最短配图间隔。
 
 以后更新：`cd /root/dafeiyu-stickers && git pull && python3 tools/build_qqstickers.py <大肥鱼的 Resources 目录>/QQStickers`，然后重启大肥鱼。
@@ -50,7 +47,7 @@ titles.tsv                每张图的配字
 
 1. 先成为协作者，或者 Fork 本仓库。
 2. 新建一个分支，把图片放进对应的情绪文件夹。
-3. 在 `titles.tsv` 末尾加一行 `文件名<Tab>配字`（比如 `joy_11.png` 配“贴贴~”），再运行 `python3 tools/build_manifest.py`，它会重新生成 `manifest.json` 和 `sha256_list.txt`，并检查下面的规范；最后跑一遍 `python3 tools/build_qqstickers.py /tmp/qqtest`，显示“完成”才算通过。
+3. 在 `titles.tsv` 末尾加一行 `文件名<Tab>配字`（比如 `joy_11.png` 配“贴贴~”），再跑一遍 `python3 tools/build_qqstickers.py /tmp/qqtest` 检查规范，显示“完成”才算通过。
 4. 提交后发 Pull Request，审核通过再合并到 main。
 
 ### 图片规范
